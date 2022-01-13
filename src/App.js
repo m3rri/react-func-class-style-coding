@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className="container">
       <h1>Hello world!</h1>
       <FuncComp initNumber={2}/>
       <ClassComp initNumber={2}/>
@@ -50,12 +50,36 @@ function FuncComp(props){
   );
 }
 
+let classStyle = 'color:red';
 class ClassComp extends React.Component {
   state = {
     number: this.props.initNumber,
     date: new Date().toString()
   }
+
+  componentWillMount(){ //현재는 사용을 지양하도록 권고
+    console.log('%cclass => componentWillMount', classStyle);
+  }
+
+  componentDidMount(){
+    console.log('%cclass => componentDidMount', classStyle);
+  }
+
+  shouldComponentUpdate(){
+    console.log('%cclass => shouldComponentUpdate', classStyle);
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    console.log('%cclass => componentWillUpdate', classStyle);
+  }
+
+  componentDidUpdate(nextProps, nextState){
+    console.log('%cclass => componentDidUpdate', classStyle);
+  }
+
   render(){
+    console.log('%cclass => render', classStyle);
     return (
       <div className="container">
         <h2>class style component</h2>
