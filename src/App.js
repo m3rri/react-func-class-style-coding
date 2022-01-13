@@ -40,6 +40,12 @@ function FuncComp(props){
     console.log('%cfunc => useEffect cycle>(componentDidMount & componentDidUpdate) '+ (++funcId), funcStyle);
     document.title = `${funcId}`;
     //side effect : 컴포넌트 렌더링과 상관없는 다른 요소에 대한 조작. 이걸 하기 위한 함수가 useEffect
+
+    //render 직후에 실행되고, 위의 코드가 실행됨
+    // 정리정돈용 🔽 : clean up.. 멀라 ㅡ.ㅡ
+    return function(){
+      console.log('%cfunc=> useEffect return ', funcStyle);
+    }
   });
 
   console.log('%cfunc => render '+ (++funcId), funcStyle);
