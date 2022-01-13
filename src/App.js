@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
 function App() {
@@ -11,6 +11,8 @@ function App() {
   );
 }
 
+let funcStyle = 'color:blue';
+let funcId = 0;
 function FuncComp(props){
   let numberState = useState(props.initNumber);
   /**
@@ -33,6 +35,14 @@ function FuncComp(props){
    * 이렇게도 쓸 수 있음(javascript 문법임)
    */
 
+  //param : 함수
+  useEffect(function(){
+    console.log('%cfunc => useEffect cycle>(componentDidMount & componentDidUpdate) '+ (++funcId), funcStyle);
+    document.title = `${funcId}`;
+    //side effect : 컴포넌트 렌더링과 상관없는 다른 요소에 대한 조작. 이걸 하기 위한 함수가 useEffect
+  });
+
+  console.log('%cfunc => render '+ (++funcId), funcStyle);
   return (
     <div className="container">
       <h2>function style component</h2>
@@ -57,7 +67,7 @@ class ClassComp extends React.Component {
     date: new Date().toString()
   }
 
-  componentWillMount(){ //현재는 사용을 지양하도록 권고
+/*  componentWillMount(){ //현재는 사용을 지양하도록 권고
     console.log('%cclass => componentWillMount', classStyle);
   }
 
@@ -77,9 +87,10 @@ class ClassComp extends React.Component {
   componentDidUpdate(nextProps, nextState){
     console.log('%cclass => componentDidUpdate', classStyle);
   }
+*/
 
   render(){
-    console.log('%cclass => render', classStyle);
+    //console.log('%cclass => render', classStyle);
     return (
       <div className="container">
         <h2>class style component</h2>
